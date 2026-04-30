@@ -6,6 +6,8 @@ import './Profile.css';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('Favorites');
+  const [isEditing, setIsEditing] = useState(false);
+  const [userName, setUserName] = useState('Alex Johnson');
 
   return (
     <div className="page-container profile-page">
@@ -14,12 +16,28 @@ const Profile = () => {
       {/* User Info */}
       <div className="user-profile-header">
         <div className="avatar-large">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Alex Johnson" />
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt={userName} />
         </div>
-        <h2 className="user-name">Alex Johnson</h2>
+        {isEditing ? (
+          <input 
+            type="text" 
+            className="edit-name-input" 
+            value={userName} 
+            onChange={(e) => setUserName(e.target.value)}
+            onBlur={() => setIsEditing(false)}
+            autoFocus
+          />
+        ) : (
+          <h2 className="user-name">{userName}</h2>
+        )}
         <p className="user-role text-gold">Movie Enthusiast</p>
         <p className="member-since">Member since March 2022</p>
-        <button className="primary-btn edit-profile-btn">Edit Profile</button>
+        <button 
+          className={`primary-btn edit-profile-btn ${isEditing ? 'save-btn' : ''}`}
+          onClick={() => setIsEditing(!isEditing)}
+        >
+          {isEditing ? 'Save Changes' : 'Edit Profile'}
+        </button>
       </div>
 
       {/* Stats */}

@@ -260,7 +260,10 @@
   background-color: var(--bg-tertiary);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
 
 .pill.active {
   background-color: rgba(251, 191, 36, 0.1);

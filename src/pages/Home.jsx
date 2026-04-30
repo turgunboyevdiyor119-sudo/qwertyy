@@ -1,22 +1,25 @@
 import { useState } from 'react';
-import { Bell, User, Search, Play, Plus } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Bell, User, Search, Play, Plus, Check } from 'lucide-react';
 import MovieCard from '../components/MovieCard';
 import './Home.css';
 
 const Home = () => {
   const [activeFilter, setActiveFilter] = useState('Action');
+  const [isInMyList, setIsInMyList] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="page-container home-page">
       {/* Custom Home Navbar */}
       <header className="home-header">
-        <div className="logo-area">
+        <Link to="/" className="logo-area">
           <div className="logo-icon">🎬</div>
           <h1 className="logo-text text-gold">CINESTREAM</h1>
-        </div>
+        </Link>
         <div className="header-actions">
           <button className="icon-btn"><Bell size={20} /></button>
-          <button className="icon-btn"><User size={20} /></button>
+          <button className="icon-btn" onClick={() => navigate('/profile')}><User size={20} /></button>
         </div>
       </header>
 
@@ -38,8 +41,14 @@ const Home = () => {
               <h2 className="featured-title">Dune: Awakening</h2>
               <p className="featured-desc">A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir...</p>
               <div className="featured-actions">
-                <button className="primary-btn"><Play size={18} fill="black" /> Watch Now</button>
-                <button className="secondary-btn"><Plus size={18} /> My List</button>
+                <button className="primary-btn" onClick={() => navigate('/details/1')}><Play size={18} fill="black" /> Watch Now</button>
+                <button 
+                  className={`secondary-btn ${isInMyList ? 'active-gold' : ''}`}
+                  onClick={() => setIsInMyList(!isInMyList)}
+                >
+                  {isInMyList ? <Check size={18} color="var(--accent-color)" /> : <Plus size={18} />} 
+                  {isInMyList ? 'In My List' : 'My List'}
+                </button>
               </div>
             </div>
           </div>
@@ -63,7 +72,7 @@ const Home = () => {
           <div className="promo-banner">
             <h3>FAMILY PASS SPECIAL</h3>
             <p>Stream on 5 devices simultaneously. Get 3 months for the price of 1!</p>
-            <button className="promo-btn">Claim Offer</button>
+            <button className="promo-btn" onClick={() => navigate('/premium')}>Claim Offer</button>
             <div className="promo-avatars">
               <div className="avatar">👦</div>
               <div className="avatar">👩</div>

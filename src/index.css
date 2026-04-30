@@ -130,4 +130,35 @@ button {
   font-size: 0.85rem;
   color: var(--accent-color);
   font-weight: 500;
+  cursor: pointer;
 }
+
+.primary-btn:active, .secondary-btn:active, .promo-btn:active, .icon-btn:active, .pill:active, .tab:active, .toggle-btn:active {
+  transform: scale(0.96);
+}
+
+.pill, .tab, .settings-item, .movie-card, .view-all {
+  cursor: pointer;
+}
+
+.active-gold {
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  background-color: rgba(251, 191, 36, 0.1) !important;
+}
+
+.edit-name-input {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--accent-color);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: var(--border-radius);
+  padding: 4px 12px;
+  width: 80%;
+  margin-bottom: 8px;
+  outline: none;
+}
+
+
