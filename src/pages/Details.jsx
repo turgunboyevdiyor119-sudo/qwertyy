@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Play, Download, Plus, Star, Send } from 'lucide-react';
 import TopBar from '../components/TopBar';
@@ -5,6 +6,15 @@ import './Details.css';
 
 const Details = () => {
   const { id } = useParams(); // Simulate fetching by ID
+  const [review, setReview] = useState('');
+  const [isWatchlisted, setIsWatchlisted] = useState(false);
+
+  const handleSendReview = () => {
+    if (review.trim()) {
+      alert('Review sent: ' + review);
+      setReview('');
+    }
+  };
 
   return (
     <div className="page-container details-page">
@@ -54,8 +64,11 @@ const Details = () => {
           <button className="primary-btn full-width">
             <Download size={20} /> Download Now
           </button>
-          <button className="secondary-btn full-width">
-            <Plus size={20} /> Watchlist
+          <button 
+            className={`secondary-btn full-width ${isWatchlisted ? 'active-gold' : ''}`}
+            onClick={() => setIsWatchlisted(!isWatchlisted)}
+          >
+            <Plus size={20} stroke={isWatchlisted ? 'var(--accent-color)' : 'currentColor'} /> {isWatchlisted ? 'In Watchlist' : 'Watchlist'}
           </button>
         </div>
 
@@ -99,8 +112,14 @@ const Details = () => {
         <div className="write-review">
           <div className="section-title">Share your thoughts</div>
           <div className="review-input-container">
-            <input type="text" placeholder="Write a review..." className="review-input" />
-            <button className="send-btn">
+            <input 
+              type="text" 
+              placeholder="Write a review..." 
+              className="review-input" 
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+            />
+            <button className="send-btn" onClick={handleSendReview}>
               <Send size={18} />
             </button>
           </div>

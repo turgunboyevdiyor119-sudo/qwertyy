@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Check, X } from 'lucide-react';
 import TopBar from '../components/TopBar';
 import './Premium.css';
 
 const Premium = () => {
+  const [billingCycle, setBillingCycle] = useState('Yearly');
+
   return (
     <div className="page-container premium-page">
       <TopBar title="Premium Subscription" showBack={true} />
@@ -16,8 +19,8 @@ const Premium = () => {
       </div>
 
       <div className="billing-toggle">
-        <button className="toggle-btn">Monthly</button>
-        <button className="toggle-btn active">Yearly</button>
+        <button className={`toggle-btn ${billingCycle === 'Monthly' ? 'active' : ''}`} onClick={() => setBillingCycle('Monthly')}>Monthly</button>
+        <button className={`toggle-btn ${billingCycle === 'Yearly' ? 'active' : ''}`} onClick={() => setBillingCycle('Yearly')}>Yearly</button>
       </div>
 
       <div className="pricing-cards">

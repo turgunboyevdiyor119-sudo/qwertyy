@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { ChevronRight, Heart, Bell, Shield } from 'lucide-react';
 import TopBar from '../components/TopBar';
 import MovieCard from '../components/MovieCard';
 import './Profile.css';
 
 const Profile = () => {
+  const [activeTab, setActiveTab] = useState('Favorites');
+
   return (
     <div className="page-container profile-page">
       <TopBar title="Profile" showBack={true} rightIcon="settings" />
@@ -37,9 +40,9 @@ const Profile = () => {
 
       {/* Tabs */}
       <div className="profile-tabs">
-        <div className="tab active">Favorites</div>
-        <div className="tab">Watchlist</div>
-        <div className="tab">Reviews</div>
+        <div className={`tab ${activeTab === 'Favorites' ? 'active' : ''}`} onClick={() => setActiveTab('Favorites')}>Favorites</div>
+        <div className={`tab ${activeTab === 'Watchlist' ? 'active' : ''}`} onClick={() => setActiveTab('Watchlist')}>Watchlist</div>
+        <div className={`tab ${activeTab === 'Reviews' ? 'active' : ''}`} onClick={() => setActiveTab('Reviews')}>Reviews</div>
       </div>
 
       {/* Tab Content (Movies Grid) */}

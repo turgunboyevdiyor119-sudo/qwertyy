@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Bell, User, Search, Play, Plus } from 'lucide-react';
 import MovieCard from '../components/MovieCard';
 import './Home.css';
 
 const Home = () => {
+  const [activeFilter, setActiveFilter] = useState('Action');
+
   return (
     <div className="page-container home-page">
       {/* Custom Home Navbar */}
@@ -75,8 +78,8 @@ const Home = () => {
           <div className="section-title">
             <span>Popular Movies</span>
             <div className="filter-pills">
-              <span className="pill active">Action</span>
-              <span className="pill">Comedy</span>
+              <span className={`pill ${activeFilter === 'Action' ? 'active' : ''}`} onClick={() => setActiveFilter('Action')}>Action</span>
+              <span className={`pill ${activeFilter === 'Comedy' ? 'active' : ''}`} onClick={() => setActiveFilter('Comedy')}>Comedy</span>
             </div>
           </div>
           <div className="movies-grid">
